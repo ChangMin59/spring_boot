@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <!--공통 헤더 영역-->
+  <header>
+    <h1><a href="/">Logo</a></h1>
+
+    <nav>
+      <a href="/join">Join Member</a>
+    </nav>
+  </header>
+
+  <!--  각 페이지 내용이 삽입될 위치   -->
+  <main  layout:fragment="body"> </main>
+
+  <!--공통 푸터 영역-->
+  <footer>
+    2025 alpaco &copy; All rights reserved.
+  </footer>
+
+</body>
+</html>

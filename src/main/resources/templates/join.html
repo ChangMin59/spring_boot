@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Join</title>
+</head>
+
+<body>
+<section  layout:fragment="body">
+    <h1>Join Member</h1>
+
+    <form action="/join/create" method="post">
+        <h2><label for="uname">User Name</label></h2>
+        <input type="text" name="uname" id="uname" placeholder="사용자 이름을 입력하세요.">
+
+        <h2><label for="email">Email</label></h2>
+        <input type="email" name="email" id="email" placeholder="이메일 주소를 입력하세요.">
+
+        <h2>Favorait Color</h2>
+        <div>
+            <label for="red">red</label>
+            <input type="radio" name="colors" id="red" value="red">
+
+            <label for="green">green</label>
+            <input type="radio" name="colors" id="green" value="green">
+
+            <label for="blue">red</label>
+            <input type="radio" name="colors" id="blue" value="blue">
+        </div>
+        
+        <div>
+            <input type="reset" value="cancel">
+            <input type="submit" value="send">
+        </div>
+    </form>
+</section>
+</body>
+</html>
