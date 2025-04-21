@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -59,6 +60,12 @@ public class JoinController {
         // ${users} 또는 th:each="user : ${users}" 로 사용
         model.addAttribute("users", users);
         return "admin";
+    }
+
+    @GetMapping("/admin/del/{id}")
+    public String delUser(@PathVariable Long id){
+        joinService.delete(id);
+        return "redirect:/admin";
     }
 }
 /*

@@ -35,6 +35,11 @@
             <h2 th:text="${user.uname}"></h2>
             <p th:text="${user.email}"></p>
             <span th:text="${user.colors}"></span>
+            <!-- 동적 url 요청시 th 연산 중괄호 앞에 @추가 -->
+            <form th:action="@{/admin/del/{id}(id=${user.id})}" method="get">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">delete user</button>
+            </form>
         </li>
     </ul>
 </section>
