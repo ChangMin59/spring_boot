@@ -6,6 +6,8 @@ import com.example.basic.repository.JoinRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class JoinService {
@@ -17,11 +19,16 @@ public class JoinService {
         // 위에서 생성한 user 라는 인스턴스를 joinRepo 의 save 메서드로 전달하기만 하면 DB 에 데이터 저장됨
         // save() 리포지토리에서 JPA 구현체가 자동으로 생성 DB 저장 전용 메서드
         joinRepo.save(user);
+
         // 컨트롤링를 통해 실제 템플릿에 전달된 데이터가 맵핑된 태그문자열 반환
-        // JoinDTO타입의 폼 객체를 전달받은 데이터를 활용한 태그 문자열 생성후 리턴
+        // JoinDTO 타입의 폼 객체를 전달받은 데이터를 활용한 태그 문자열 생성후 리턴
         String result = "name:" +dto.getUname()+"<br />"
                 + "email:" +dto.getEmail()+ "<br />"
                 + "my color:" +dto.getColors();
         return result;
+    }
+
+    public List<JoinEntity> getAllUsers(){
+        return joinRepo.findAll();
     }
 }
