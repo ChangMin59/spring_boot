@@ -52,9 +52,25 @@ public class JoinController {
     */
     }
     @GetMapping("/admin")
+    // Spring 이 자동 주입하는 객체로, 컨트롤러 → 뷰 템플릿으로 데이터를 전달
     public String showAdminPage(Model model){
+        // getAllUsers(): DB 에서 사용자 정보를 조회하는 메서드
         List<JoinEntity> users = joinService.getAllUsers();
+        // ${users} 또는 th:each="user : ${users}" 로 사용
         model.addAttribute("users", users);
         return "admin";
     }
 }
+/*
+[ 브라우저 요청: GET /admin ]
+         ↓
+[ 컨트롤러 showAdminPage() ]
+         ↓
+[ joinService.getAllUsers() → DB 조회 ]
+         ↓
+[ model 에 users 리스트 저장 ]
+         ↓
+[ return "admin" → admin.html 실행 ]
+         ↓
+[ 뷰 페이지 렌더링 → 사용자에게 응답 ]
+ */

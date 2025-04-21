@@ -9,14 +9,20 @@
 <section  layout:fragment="body">
     <h1>admin Page</h1>
     <h1>회원 목록 페이지</h1>
+    <!--  HTML 표(table)를 만듦  -->
     <table border="1">
+        <!-- <tr>한 줄(row)을 의미 -->
         <tr>
+            <!-- <th>는 "table header" → 굵게, 가운데 정렬 -->
             <th>ID</th>
             <th>이름</th>
             <th>이메일</th>
             <th>선호 색상</th>
         </tr>
+        <!-- th:each: Thymeleaf 반복문 -->
+        <!-- "user : ${users}": users 리스트의 각 요소를 user 로 하나씩 꺼냄 -->
         <tr th:each="user : ${users}">
+            <!-- <td>는 셀(cell) 한 칸을 의미 -->
             <td th:text="${user.id}"></td>
             <td th:text="${user.uname}"></td>
             <td th:text="${user.email}"></td>
