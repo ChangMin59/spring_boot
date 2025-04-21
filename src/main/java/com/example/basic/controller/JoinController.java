@@ -13,15 +13,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class JoinController {
     // Spring이 JoinService 객체를 자동으로 찾아서 이 변수에 주입
+    // 서비스 계층으로부터 joinService라는 인스턴스 @Autowired라는 어느테이션을 통해 바로 해당 인스턴스 객체로 바로 가져올수 있음(new 연산자 호출 필요없음)
     @Autowired
     private JoinService joinService;
 
-    // /join 으로 접속하면 이 메서드가 실행
+    // join 으로 접속하면 이 메서드가 실행
+    // 처음 조인폼 화면 출력하는 get방식 요청
     @GetMapping("/join")
     public String join(){
         return "join";
     }
 
+    // 해당 조인폼 화면에서 폼의 전송 이벤트 발생시 데이터 가공하는 post방식 요청
+    // 이때 폼의 모든 요소를 일일이 전달하는 것이 아닌 DTO파일로 감싸고 전달
+    // Model타입의 파라미터, 서비스에 전달된 데이터를 뷰템플릿에 전달하기 위한 전용 클래스
     @PostMapping("/join/create")
     public String create(
             // JoinDTO타입의 formDTO라는 파라미터로 기존 @RequestParam대체
