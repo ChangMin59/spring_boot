@@ -1,6 +1,7 @@
 package com.example.basic.controller;
 import com.example.basic.dto.JoinDTO;
 import com.example.basic.service.JoinService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 // Model 컨트롤러에서 템플릿에 데이터를 전달시 필요한 스프릿 내장
@@ -11,11 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 // (URL)을 받아서, HTML 화면(View 페이지) 를 반환
 @Controller
+// 인스턴스를 담을 멤버변수에 final 지정 가능케함
+@RequiredArgsConstructor
 public class JoinController {
-    // Spring이 JoinService 객체를 자동으로 찾아서 이 변수에 주입
-    // 서비스 계층으로부터 joinService라는 인스턴스 @Autowired라는 어느테이션을 통해 바로 해당 인스턴스 객체로 바로 가져올수 있음(new 연산자 호출 필요없음)
-    @Autowired
-    private JoinService joinService;
+    private final JoinService joinService;
 
     // join 으로 접속하면 이 메서드가 실행
     // 처음 조인폼 화면 출력하는 get방식 요청
