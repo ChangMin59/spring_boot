@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Member</title>
+</head>
+
+<body>
+<section  layout:fragment="body">
+    <h1>Edit Member Information</h1>
+
+    <form action="/admin/update" method="post">
+        <input type="hidden" name="uname" id="id" th:field="${user.id}">
+        <h2><label for="uname">User Name</label></h2>
+        <input type="text" name="uname" id="uname" th:field="${user.uname}">
+
+        <h2><label for="email">Email</label></h2>
+        <input type="email" name="email" id="email" th:field="${user.email}">
+
+        <h2>Favorait Color</h2>
+        <div>
+            <label for="red">red</label>
+            <input type="radio" name="colors" id="red" value="red">
+
+            <label for="green">green</label>
+            <input type="radio" name="colors" id="green" value="green">
+
+            <label for="blue">blue</label>
+            <input type="radio" name="colors" id="blue" value="blue">
+        </div>
+
+        <div>
+            <input type="reset" value="cancel">
+            <input type="submit" value="send">
+        </div>
+    </form>
+</section>
+</body>
+</html>

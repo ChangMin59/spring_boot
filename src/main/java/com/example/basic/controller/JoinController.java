@@ -67,6 +67,23 @@ public class JoinController {
         joinService.delete(id);
         return "redirect:/admin";
     }
+
+    // 수정 버튼 클릭시 해당 메서드 어노테이션 호출
+    @GetMapping("/admin/edit/{id}")
+    public String editUser(@PathVariable Long id, Model model){
+        // 서비스 메서드인 getUserById 에 클릭한 게시글의 아이디값 전달해서 게시글 반환받음
+        JoinEntity user = joinService.getUserById(id);
+        // edit 뷰화면에 해당 데이터 전달
+        model.addAttribute("user", user);
+        return "edit";
+    }
+
+    // 수정폼 화면에서 최종 수정이 일어나는 컨트롤러
+    @PostMapping("/admin/update")
+    public String updateUser(@PathVariable JoinEntity formUser){
+        joinService.updateUser(formUser);
+        return "redirect:/admin";
+    }
 }
 /*
 [ 브라우저 요청: GET /admin ]

@@ -37,8 +37,13 @@
             <span th:text="${user.colors}"></span>
             <!-- 동적 url 요청시 th 연산 중괄호 앞에 @추가 -->
             <form th:action="@{/admin/del/{id}(id=${user.id})}" method="get">
-                <input type="hidden" name="_method" value="delete" />
+                <!-- 딜리트버튼 누를시 DB 데이터 동적으로 삭제 -->
                 <button type="submit">delete user</button>
+            </form>
+
+            <form th:action="@{/admin/edit/{id}(id=${user.id})}" method="get">
+                <!-- 딜리트버튼 누를시 DB 데이터 동적으로 삭제 -->
+                <button type="submit">edit user</button>
             </form>
         </li>
     </ul>
