@@ -27,7 +27,7 @@ public class JoinController {
     }
 
     @GetMapping("/admin")
-    // 기본 URL뒤의 ? 다음의 값을 받을 때는 @RequestParamdmfh 전달 받음
+    // 기본 URL 뒤의 ? 다음의 값을 받을 때는 @RequestParam 으로 전달 받음
     public String showAdminPage(@RequestParam(defaultValue="0") int page, Model model){
         //각 페이지별 출력할 데이터 개수
         int pageSize = 3;
@@ -45,7 +45,7 @@ public class JoinController {
     }
 
     @GetMapping("/admin/edit/{id}")
-    // 기존 url뒤의 /의 값을 받을 때는 @PathVariable로 전달 받음
+    // 기존 url 뒤의 /의 값을 받을 때는 @PathVariable 로 전달 받음
     public String editUser(@PathVariable Long id, Model model){
         JoinEntity user = joinService.getUserById(id);
         model.addAttribute("user", user);

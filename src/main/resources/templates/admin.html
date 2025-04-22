@@ -28,10 +28,12 @@
     </ul>
 
     <nav>
-        <!--    #numbers. sequence(0, 4) => [0,1,2,3,4] 숫자형 리스트 반환    -->
-        <!--    아래와 같이 굳이 숫자형 리스트를 만들면서 까지 반복돌리는 이유는 페이지네이션에 숫자가 들어가야 되기 때문    -->
-        <!--  /admin?page=페이지번호; 형식으로 파라미터 쿼리를 날려야 함       -->
-        <a th:href="@{'/admin?page='+${i} }" th:each="i: ${#numbers.sequence(0, userPage.totalPages -1)}" th:text="${i+1}"> </a>
+        <button th:if="${userPage.hasPrevious()}">prev</button>
+        <!-- #numbers. sequence(0, 4) => [0,1,2,3,4] 숫자형 리스트 반환 -->
+        <!-- 아래와 같이 굳이 숫자형 리스트를 만들면서 까지 반복돌리는 이유는 페이지네이션에 숫자가 들어가야 되기 때문 -->
+        <!-- /admin?page=페이지번호; 형식으로 파라미터 쿼리를 날려야 함 -->
+        <a th:style="'color:' + (${currentPage} == ${i} ? 'red' : 'black')" th:class="${currentPage == i? 'on':''}" th:href="@{'/admin?page='+${i} }" th:each="i: ${#numbers.sequence(0, userPage.totalPages -1)}" th:text="${i+1}"> </a>
+        <button th:if="${userPage.hasNext()}">next</button>
     </nav>
 </section>
 </body>
