@@ -3,50 +3,36 @@
       layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>admin</title>
+    <title>Admin</title>
 </head>
+
 <body>
 <section  layout:fragment="body">
-    <h1>admin Page</h1>
-    <h1>회원 목록 페이지</h1>
-    <!--  HTML 표(table)를 만듦  -->
-<!--    <table border="1">-->
-<!--        &lt;!&ndash; <tr>한 줄(row)을 의미 &ndash;&gt;-->
-<!--        <tr>-->
-<!--            &lt;!&ndash; <th>는 "table header" → 굵게, 가운데 정렬 &ndash;&gt;-->
-<!--            <th>ID</th>-->
-<!--            <th>이름</th>-->
-<!--            <th>이메일</th>-->
-<!--            <th>선호 색상</th>-->
-<!--        </tr>-->
-<!--        &lt;!&ndash; th:each: Thymeleaf 반복문 &ndash;&gt;-->
-<!--        &lt;!&ndash; "user : ${users}": users 리스트의 각 요소를 user 로 하나씩 꺼냄 &ndash;&gt;-->
-<!--        <tr th:each="user : ${users}">-->
-<!--            &lt;!&ndash; <td>는 셀(cell) 한 칸을 의미 &ndash;&gt;-->
-<!--            <td th:text="${user.id}"></td>-->
-<!--            <td th:text="${user.uname}"></td>-->
-<!--            <td th:text="${user.email}"></td>-->
-<!--            <td th:text="${user.colors}"></td>-->
-<!--        </tr>-->
-<!--    </table>-->
-
+    <h1>Admin Page</h1>
     <ul>
-        <li th:each="user: ${users}">
+        <!--    th:each="변수 : 리스트" 해당 반복문은 리스트의 갯수만큼 반복을 돌며 반복도는 해당 데이터를 변수에 담아줌,  숫자 카운팅 기능 없음    -->
+        <li th:each="user: ${userPage.content}">
             <h2 th:text="${user.uname}"></h2>
             <p th:text="${user.email}"></p>
             <span th:text="${user.colors}"></span>
+
             <!-- 동적 url 요청시 th 연산 중괄호 앞에 @추가 -->
-            <form th:action="@{/admin/del/{id}(id=${user.id})}" method="get">
-                <!-- 딜리트버튼 누를시 DB 데이터 동적으로 삭제 -->
+            <form th:action="@{'/admin/del/' + ${user.id} }" method="get">
                 <button type="submit" onclick="return confirm('정말 삭제하겠습니까?')">delete user</button>
             </form>
 
-            <form th:action="@{/admin/edit/{id}(id=${user.id})}" method="get">
-                <!-- 딜리트버튼 누를시 DB 데이터 동적으로 삭제 -->
+            <form th:action="@{'/admin/edit/' + ${user.id} }" method="get">
                 <button type="submit">edit user</button>
             </form>
         </li>
     </ul>
+
+    <nav>
+        <!--    #numbers. sequence(0, 4) => [0,1,2,3,4] 숫자형 리스트 반환    -->
+        <!--    아래와 같이 굳이 숫자형 리스트를 만들면서 까지 반복돌리는 이유는 페이지네이션에 숫자가 들어가야 되기 때문    -->
+        <!--  /admin?page=페이지번호; 형식으로 파라미터 쿼리를 날려야 함       -->
+        <a th:href="@{'/admin?page='+${i} }" th:each="i: ${#numbers.sequence(0, userPage.totalPages -1)}" th:text="${i+1}"> </a>
+    </nav>
 </section>
 </body>
 </html>

@@ -4,6 +4,8 @@ import com.example.basic.dto.JoinDTO;
 import com.example.basic.entity.JoinEntity;
 import com.example.basic.repository.JoinRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,13 +41,10 @@ public class JoinService {
     public  void updateUser(JoinEntity user){
         joinRepo.save(user);
     }
-}
-/*
-    JPA Respository 의 dirty checking 을 통한 저장, 수정 구분
-    - JPA 에서는 따로 저장과 수정 메서드가 구분되어 있지 않고 save 로 모두 해결
-    - DB 상에 id 값에 매칭되는 데이터가 없으면 save 호출시 -> insert SQL 문으로 변환
-    - DB 상에 id 값에 매칭되는 데이터가 있으면 save 호출시 -> update SQL 문으로 변환
 
-    - DTO 는 아직 DB에 저장되지 않은 상태에서 폼필드값으로 구분해서 생성한 데이터틀 (처음 DB에 데이터 저장시, 폼 값 전달시 필요)
-    - Entity 는 DB에 저장된 데이터의 틀을 강제하는 스키마 개념 (수정시 필요)
- */
+    // 페이지 번호에 따라 유저 데이터 가져오는 메서드
+    public Page<JoinEntity> getUsersByPage(int page, int size){
+        // page: 페이지 번호, size: 한페이지에 불러올 데이터 갯수
+        return joinRepo.findAll(PageRequest.of(page, size));
+    }
+}
