@@ -10,15 +10,16 @@
 <section  layout:fragment="body">
     <h1>Login Page</h1>
     <!--  초기 접속시 컨트롤러부터 사용자 정보가 담길 빈 인스턴스 객체가 전달되고 사용자가 폼에 로그인 정보 입력하고 전송하는 순간 빈 DTO객체 틀에 값이 채워지면서 컨트롤러 재 전송하는-->
-    <form method="post" action="@{/login/check}">
-        <label>Name:</label> <input type="text"  required th:field="${loginDTO.uname}" /><br />
-        <label>Email:</label> <input type="email"  required th:field="${loginDTO.email}" /><br />
+    <form method="post" th:action="@{/login/check}" th:object="${loginDTO}" >
+        <label>Name:</label> <input type="text"  required th:field="*{uname}" /><br />
+        <label>Email:</label> <input type="email"  required th:field="*{email}" /><br />
         <button type="submit">Login</button>
     </form>
 
-    <div th:if="${LoginDTO.error}">
-        <p style="color:red;" th:text="${loginDTO.error}"></p>
+    <div th:if="${error}">
+
     </div>
+    <p style="color:red;" th:text="${error}"></p>
 
 </section>
 </body>

@@ -1,13 +1,12 @@
 package com.example.basic.controller;
 
 import com.example.basic.dto.LoginDTO;
-import com.example.basic.service.JoinService;
+import com.example.basic.entity.JoinEntity;
 import com.example.basic.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,17 +23,16 @@ public class LoginController {
     }
 
 
-    @PostMapping("/login/chekc")
-    public String checkLogin(@ModelAttibute LoginDTO loginDTO, Model model){
-        //뷰에서 전달받은 로그인 정보를 checkUser 라는 서비스 메서드에 넣어서 호출한뒤 매칭되는 사용자 정보 반환
-        JoinEnity user = loginService.checkUser(loginDTO.getUname(), loginDTO.getEmail());
+    @PostMapping("/login/check")
+    public String checkLogin(@ModelAttribute LoginDTO loginDTO, Model model) {
+        JoinEntity user = loginService.checkUser(loginDTO.getUname(), loginDTO.getEmail());
 
-        if(user != null){
-            //로그인 성공
+        if (user != null) {
+
             return "redirect:/admin";
-        }else {
-            //로그인 실패시 에러 메세지 반환
-            model.addAttribute("error", "일치하는 사용자 정보가 없습니다.");
+        } else {
+            model.addAttribute("error", "일치하는 사용자가 없습니다.");
+
             return "login";
         }
     }
