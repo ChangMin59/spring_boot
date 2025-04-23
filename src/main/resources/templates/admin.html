@@ -28,12 +28,25 @@
     </ul>
 
     <nav>
-        <button th:if="${userPage.hasPrevious()}">prev</button>
-        <!-- #numbers. sequence(0, 4) => [0,1,2,3,4] 숫자형 리스트 반환 -->
-        <!-- 아래와 같이 굳이 숫자형 리스트를 만들면서 까지 반복돌리는 이유는 페이지네이션에 숫자가 들어가야 되기 때문 -->
-        <!-- /admin?page=페이지번호; 형식으로 파라미터 쿼리를 날려야 함 -->
-        <a th:style="'color:' + (${currentPage} == ${i} ? 'red' : 'black')" th:class="${currentPage == i? 'on':''}" th:href="@{'/admin?page='+${i} }" th:each="i: ${#numbers.sequence(0, userPage.totalPages -1)}" th:text="${i+1}"> </a>
-        <button th:if="${userPage.hasNext()}">next</button>
+        <!--  현재 페이지 기준으로  이전 페이지가 있을때만 출력   -->
+        <!--    좌우 버튼을 a 태그로만 작성하면 아래쪽 반복문으로 출력되는 a 요소가 같이 카운팅 되므로 span 으로 감싸서 span 요소 자체를 분기처리    -->
+        <span  th:if="${userPage.hasPrevious()}">
+             <a  th:href="@{'/admin?page=' + ${userPage.number - 1}}">Prev</a>
+        </span>
+
+        <a
+                th:each="i: ${#numbers.sequence(0, userPage.totalPages -1)}"
+                th:class="${currentPage == i ? 'on' : ''}"
+                th:href="${currentPage != i} ? '/admin?page=' + ${i} : null"
+                th:text="${i+1}">
+        </a>
+
+        <!--   현재 페이지 기준으로 이후 페이지가 있을때만 출력    -->
+        <!--    좌우 버튼을 a 태그로만 작성하면 위쪽 반복문으로 출력되는 a 요소가 같이 카운팅 되므로 span 으로 감싸서 span 요소 자체를 분기처리    -->
+        <span  th:if="${userPage.hasNext()}">
+            <a  th:href="@{'/admin?page=' + ${userPage.number + 1}}">Next</a>
+        </span>
+
     </nav>
 </section>
 </body>
