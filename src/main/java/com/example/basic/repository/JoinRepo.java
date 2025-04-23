@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 //Jpa 라는 인터페이스에 JoinEntity 내용을 기반으로한 JoinRepo 라는 커스텀 인터페이스 확장
 public interface JoinRepo extends JpaRepository<JoinEntity, Long> {
+    //uname 값과 email 정보를 활용해서 기존 DB 상의 데이터 유무를 찾는 커스텀 메서드 인터페이스에 등록
+    JoinEntity findByUnameAndEmail(String uname, String email);
 }
 
 /*
