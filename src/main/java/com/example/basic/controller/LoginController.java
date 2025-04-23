@@ -1,16 +1,24 @@
 package com.example.basic.controller;
 
+import com.example.basic.dto.LoginDTO;
 import com.example.basic.service.JoinService;
+import com.example.basic.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
+    private final LoginService loginService;
 
     @GetMapping("/login")
-    public String login(){
+    public String loginPage(Model model){
+        //get 방식 요청이므로 아직 넘겨받은 폼 값이 없어서 new 연산자로 빈 인스턴스 객체를 생성후 view 템플릿에 전달
+        //해당 빈 DTO 객체는 추후 뷰화면에서 사용자가 입력한 값으로 담기게 됨
+        model.addAttribute("loginDTO", new LoginDTO());
+
         return "login";
     }
 }
